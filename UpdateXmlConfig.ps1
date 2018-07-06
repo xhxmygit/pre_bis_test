@@ -142,7 +142,7 @@ Function UpdateXmlConfig([string]$originalConfigFile, [string]$newConfigFileDirc
 "Test suite: $testSuite"
 "Test cases: $DebugCases"
 "Git branch: $kernelGitBranch"
-"Git branch: $kernelCommitID"
+"Git commit: $kernelCommitID"
 "`n"
 "#############################################################"
 "`n`n"
