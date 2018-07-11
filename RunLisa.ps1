@@ -14,22 +14,27 @@ param([string] $vmName,
 	[string] $kernelGitBranch,
 	[string] $kernelCommitID )
 
-cd .\WS2012R2\lisa
+	
+Copy-Item .\CI\UpdateXmlConfig.ps1 .\BIS\WS2012R2\lisa
+Copy-Item .\CI\UtilsOfUpdateXmlConfig.ps1 .\BIS\WS2012R2\lisa
+
+cd .\BIS\WS2012R2\lisa
 
 # Update the xml file firstly
 
 if( $kernelGitBranch -and  $kernelCommitID )
 {
-	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -testSuite $hvServer -DebugCases $DebugCases  -kernelGitBranch $kernelGitBranch -kernelCommitID $kernelCommitID
+	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -testSuite $testSuite -DebugCases $DebugCases  -kernelGitBranch $kernelGitBranch -kernelCommitID $kernelCommitID
 }
 else
 {
-	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -testSuite $hvServer -DebugCases $DebugCases
+	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -testSuite $testSuite -DebugCases $DebugCases
 }
 
 #Now, run lisa test
-.\lisa run run.xml
 
-cd ..\..
+.\lisa.ps1 run run.xml
+
+cd ..\..\..
 
 
