@@ -2,14 +2,14 @@
 #######################################################################
 # 
 # Examples:
-#	.\RunLisa.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -testSuite "debug" -DebugCases "BuildKernel" -kernelGitBranch "master" -kernelCommitID "123456789"
-#	.\RunLisa.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -testSuite "debug" -DebugCases "Heartbeat" 
+#	.\RunLisa.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -suiteTest "debug" -DebugCases "BuildKernel" -kernelGitBranch "master" -kernelCommitID "123456789"
+#	.\RunLisa.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -suiteTest "debug" -DebugCases "Heartbeat" 
 #
 #######################################################################
 
 param([string] $vmName, 
 	[string] $hvServer, 
-	[string] $testSuite,
+	[string] $suiteTest,
 	[string] $DebugCases,
 	[string] $kernelGitBranch,
 	[string] $kernelCommitID )
@@ -24,11 +24,11 @@ cd .\BIS\WS2012R2\lisa
 
 if( $kernelGitBranch -and  $kernelCommitID )
 {
-	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -testSuite $testSuite -DebugCases $DebugCases  -kernelGitBranch $kernelGitBranch -kernelCommitID $kernelCommitID
+	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -suiteTest $suiteTest -DebugCases $DebugCases  -kernelGitBranch $kernelGitBranch -kernelCommitID $kernelCommitID
 }
 else
 {
-	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -testSuite $testSuite -DebugCases $DebugCases
+	.\UpdateXmlConfig.ps1   -vmName $vmName  -hvServer $hvServer -suiteTest $suiteTest -DebugCases $DebugCases
 }
 
 #Now, run lisa test

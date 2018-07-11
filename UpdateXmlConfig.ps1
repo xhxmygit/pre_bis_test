@@ -3,15 +3,15 @@
 Fuc: Update the xml configuration.
 
 Execute the script examples:
-	.\UpdateXmlConfig.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -testSuite "debug" -DebugCases "BuildKernel" -kernelGitBranch "master" -kernelCommitID "123456789"
-	.\UpdateXmlConfig.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -testSuite "debug" -DebugCases "Heartbeat" 
+	.\UpdateXmlConfig.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -suiteTest "debug" -DebugCases "BuildKernel" -kernelGitBranch "master" -kernelCommitID "123456789"
+	.\UpdateXmlConfig.ps1 -vmName "FreebsdStable11" -hvServer "localhost" -suiteTest "debug" -DebugCases "Heartbeat" 
 #>
 
 
 
 param([string] $vmName, 
 	[string] $hvServer, 
-	[string] $testSuite,
+	[string] $suiteTest,
 	[string] $DebugCases,
 	[string] $kernelGitBranch,
 	[string] $kernelCommitID )
@@ -95,7 +95,7 @@ Function UpdateXmlConfig([string]$originalConfigFile, [string]$newConfigFileDirc
 	$xml.config.VMs.vm.vmName = $vmName
 	
 	# Update test suite
-	$xml.config.VMs.vm.suite = $testSuite
+	$xml.config.VMs.vm.suite = $suiteTest
 	
 	# Update test hvServer
 	$server = $hvServer
@@ -139,7 +139,7 @@ Function UpdateXmlConfig([string]$originalConfigFile, [string]$newConfigFileDirc
 "#############################################################"
 "`n"
 "VM name: $vmName"
-"Test suite: $testSuite"
+"Test suite: $suiteTest"
 "Test cases: $DebugCases"
 "Git branch: $kernelGitBranch"
 "Git commit: $kernelCommitID"
